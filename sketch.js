@@ -15,8 +15,8 @@ function draw() {
 
   ground.show();
   player.show();
-  
-  // TODO need the turret to follow the mouse
+  player.turret_point(mouseX, mouseY);
+
 }
 
 class Ground {
@@ -31,15 +31,27 @@ class Ground {
   }
 }
 
+
 class Player {
   constructor(h) {
     this.x = width / 2;
     this.y = height - h;
+    this.turret_x = width / 2;
+    this.turret_y = width / 2;
+  }
+
+  turret_point(x, y) {
+    this.turret_x = x;
+    this.turret_y = y;
   }
 
   show() {
     fill(0);
     ellipse(this.x,this.y,20);
-    rect(this.x - 2, this.y - 20, 3, 20)
+
+    push();
+    strokeWeight(2);
+    line(this.x, this.y, this.turret_x, this.turret_y);
+    pop();
   }
 }
